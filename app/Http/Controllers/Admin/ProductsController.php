@@ -7,12 +7,13 @@ use App\Http\Requests\MassDestroyProductRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Product;
+use Illuminate\Support\Facades\Gate;
 
 class ProductsController extends Controller
 {
     public function index()
     {
-        abort_unless(\Gate::allows('product_access'), 403);
+        abort_unless(Gate::allows('product_access'), 403);
 
         $products = Product::all();
 

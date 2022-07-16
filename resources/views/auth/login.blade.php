@@ -1,14 +1,18 @@
 @extends('layouts.app')
 @section('content')
 <div class="login-box">
-    <div class="login-logo">
+    {{-- <div class="login-logo">
         <div class="login-logo">
             <a href="#">
-                {{ trans('global.site_title') }}
+                <b>MATCHER</b>
             </a>
         </div>
-    </div>
-    <div class="card">
+    </div> --}}
+    <div class="card card-outline card-warning">
+        <div class="card-header text-center">
+                {{-- <img src="{{asset('images/1656740327135.jpg')}}" alt="Matcher Logo" class="brand-image img-circle elevation-3" style="opacity: .8" height="50"> --}}
+                <a href="../../index2.html" class="h1">MATCHER</a>
+            </div>
         <div class="card-body login-card-body">
             <p class="login-box-msg">Sign in to start your session</p>
             @if(\Session::has('message'))
@@ -44,7 +48,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">{{ trans('global.login') }}</button>
+                        <button type="submit" class="btn btn-warning btn-block">{{ trans('global.login') }}</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -52,14 +56,14 @@
 
 
 
-            <p class="mb-1">
+            {{-- <p class="mb-1">
                 <a class="" href="{{ route('password.request') }}">
                     {{ trans('global.forgot_password') }}
                 </a>
-            </p>
+            </p> --}}
             <p class="mb-0">
-
-            </p>
+                <a href="/register" class="text-center">Register a new membership</a>
+              </p>
             <p class="mb-1">
 
             </p>

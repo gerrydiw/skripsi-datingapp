@@ -1,13 +1,24 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::redirect('/', '/login');
 
-Route::redirect('/home', '/admin');
+Auth::routes();
 
-Auth::routes(['register' => false]);
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/profile', 'ProfileController@index')->name('profile');
+    Route::put('profile/update/{id}', 'ProfileController@update')->name('profile.update');
+    Route::put('profile/updatephoto/{id}', 'ProfileController@updatePhoto')->name('profile.updatePhoto');
+    Route::put('profile/updatektp/{id}', 'ProfileController@updateKtp')->name('profile.updateKtp');
+    Route::get('find', 'FindController@index')->name('find.index');
+    Route::post('find/people', 'FindController@findPeople')->name('find.people');
+});
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
-    Route::get('/', 'HomeController@index')->name('home');
+Route::group(['as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+    // Route::get('/home', 'HomeController@index')->name('home');
 
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
 

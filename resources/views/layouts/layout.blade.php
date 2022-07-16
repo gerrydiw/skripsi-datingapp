@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ trans('global.site_title') }}</title>
+    <title>MATCHER</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.6.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -18,19 +18,42 @@
     <link href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="{{ asset('css/adminltev3.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     @yield('styles')
 </head>
 
-<body class="sidebar-mini sidebar-open" style="height: auto;">
+<body class="hold-transition layout-top-nav">
     <div class="wrapper">
-        <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
             <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+            <div class="container">
+              <a href="{{route("home")}}" class="navbar-brand">
+                <img src="{{asset('images/1656740327135.jpg')}}" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light"><b>MATCHER</b></span>
+              </a>
+            <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">                
+                <li class="nav-item d-none d-sm-inline-block">
+                  <a href="{{route("home")}}" class="nav-link">Home</a>
                 </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                  <a href="{{route("find.index")}}" class="nav-link">Find</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                  <a href="#" class="nav-link">Place</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Profil</a>
+                  <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                    <li><a href="{{route('profile')}}" class="dropdown-item">Change Profil</a></li>
+      
+                    <li class="dropdown-divider"></li>
+      
+                    <!-- Level two dropdown-->
+                    <li><a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a></li>
+                   
             </ul>
 
             <!-- Right navbar links -->
@@ -50,13 +73,16 @@
             @endif
 
         </nav>
+    </div>
 
-        @include('partials.menu')
-        <div class="content-wrapper" style="min-height: 917px;">
+        {{-- @include('partials.menu') --}}
+        <div class="content-wrapper">
             <!-- Main content -->
-            <section class="content" style="padding-top: 20px">
-                @yield('content')
-            </section>
+            <div class="container">
+              <section class="content" style="padding-top: 20px">
+                  @yield('content')
+              </section>
+            </div>
             <!-- /.content -->
         </div>
 
@@ -91,6 +117,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+    {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> --}}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script>
         $(function() {

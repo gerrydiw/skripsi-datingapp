@@ -1,7 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="min-height: 917px;">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-        <span class="brand-text font-weight-light">Project</span>
+        <img src="{{asset('images/1656740327135.jpg')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">MATCHER</span>
     </a>
 
     <!-- Sidebar -->

@@ -3,12 +3,12 @@
 namespace App;
 
 use Carbon\Carbon;
-use Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -27,9 +27,17 @@ class User extends Authenticatable
     ];
 
     protected $fillable = [
+        'nik',
         'name',
+        'dob',
         'email',
         'password',
+        'url_foto',
+        'url_ktp',
+        'verified',
+        'hobbies',
+        'city_id',
+        'aboutme',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -62,5 +70,15 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function age()
+    {
+        return Carbon::parse($this->attributes['dob'])->age;
+    }
+
+    public function city()
+    {
+        return $this->belongsTo('App\City');
     }
 }
