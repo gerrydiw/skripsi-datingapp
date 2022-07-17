@@ -37,11 +37,12 @@
                               <ul class="ml-0 mb-0 fa-ul text-muted">
                                 <li class="medium"> <b>Hobby: </b> {{$user->hobbies}}</li>
                                 <li class="medium"> <b>About me: </b> {{$user->aboutme}}</li>
+                                <li class="medium"> <b>Address: </b> @if(!empty($user->city->id)) {{ $user->city->name}} @endif</li>
                               </ul>
-                              <ul class="ml-4 mb-0 fa-ul text-muted">
-                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address:  @if(!empty($user->city->id)) {{ $user->city->name}} @endif</li>
+                              {{-- <ul class="ml-4 mb-0 fa-ul text-muted">
+                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address:  @if(!empty($user->city->id)) {{ $user->city->name}} @endif</li> --}}
                                 {{-- <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: + 800 - 12 12 23 52</li> --}}
-                              </ul>
+                              {{-- </ul> --}}
                             </div>
                             <div class="col-5 text-center">
                               <img src="{{ $user->url_foto ? asset('images/profiles/'.$user->url_foto) : asset('images/default-user-photo.png')}}" alt="user-avatar" class="img-circle img-fluid">
@@ -53,7 +54,7 @@
                             <a href="#" class="btn btn-sm bg-teal">
                               <i class="fas fa-comments"></i>
                             </a>
-                            <a href="#" class="btn btn-sm btn-primary">
+                            <a href="{{route("profile.view", [$user->id])}}" class="btn btn-sm btn-primary">
                               <i class="fas fa-user"></i> View Profile
                             </a>
                           </div>

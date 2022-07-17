@@ -50,6 +50,9 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
+        $user = User::find($id);
+        $cities = City::all();
+        return view('viewprofile', compact('user', 'cities'));
     }
 
     /**

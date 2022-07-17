@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FindController extends Controller
@@ -15,7 +16,7 @@ class FindController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(9);
+        $users = User::whereNotIn('id', [1, Auth::user()->id])->paginate(9);
         return view('find', compact('users'));
     }
 
@@ -28,7 +29,7 @@ class FindController extends Controller
     public function findPeople(Request $request)
     {
         $value = strtolower($request->value);
-        $users = User::whereRaw("LOWER(name) like '%" . $value . "%'")->paginate(9);
+        $users = User::whereNotIn('id', [1, Auth::user()->id])->whereRaw("LOWER(name) like '%" . $value . "%'")->paginate(9);
         return view('find', compact('users'));
     }
 
@@ -56,7 +57,6 @@ class FindController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**

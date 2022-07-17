@@ -10,6 +10,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/profile', 'ProfileController@index')->name('profile');
+    Route::get('/viewprofile/{id}', 'ProfileController@show')->name('profile.view');
     Route::put('profile/update/{id}', 'ProfileController@update')->name('profile.update');
     Route::put('profile/updatephoto/{id}', 'ProfileController@updatePhoto')->name('profile.updatePhoto');
     Route::put('profile/updatektp/{id}', 'ProfileController@updateKtp')->name('profile.updateKtp');
