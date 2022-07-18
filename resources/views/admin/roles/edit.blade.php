@@ -1,7 +1,7 @@
-@extends('layouts.admin')
+@extends('layouts.layout')
 @section('content')
 
-<div class="card">
+<div class="card card-warning card-outline">
     <div class="card-header">
         {{ trans('global.edit') }} {{ trans('global.role.title_singular') }}
     </div>

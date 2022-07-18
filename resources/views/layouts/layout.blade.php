@@ -25,7 +25,7 @@
     @yield('styles')
 </head>
 
-<body class="hold-transition layout-top-nav">
+<body class="hold-transition layout-top-nav layout-navbar-fixed">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
             <!-- Left navbar links -->
@@ -53,7 +53,22 @@
       
                     <!-- Level two dropdown-->
                     <li><a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a></li>
-                   
+                  </ul>
+                </li>
+                @can('user_management_access')
+                <li class="nav-item dropdown">
+                  <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">User Management</a>
+                  <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                    <li><a href="{{route('admin.users.index')}}" class="dropdown-item">Users</a></li>
+                    <li><a href="{{route('admin.roles.index')}}" class="dropdown-item">Roles</a></li>
+                    <li><a href="{{route('admin.permissions.index')}}" class="dropdown-item">Permissions</a></li>
+                    {{-- <li class="dropdown-divider"></li> --}}
+      
+                    <!-- Level two dropdown-->
+                    {{-- <li><a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a></li> --}}
+                  </ul>
+                </li>
+                @endcan
             </ul>
 
             <!-- Right navbar links -->
@@ -79,7 +94,7 @@
         <div class="content-wrapper">
             <!-- Main content -->
             <div class="container">
-              <section class="content" style="padding-top: 20px">
+              <section class="content" style="padding-top: 90px">
                   @yield('content')
               </section>
             </div>
@@ -88,9 +103,9 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.0.0-alpha
+                <b>Version</b> 1.0.0
             </div>
-            <strong> &copy;</strong> {{ trans('global.allRightsReserved') }}
+            <strong> MATCHER &copy;</strong>  {{ trans('global.allRightsReserved') }}
         </footer>
         <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
@@ -155,7 +170,7 @@
     },
     order: [],
     scrollX: true,
-    pageLength: 100,
+    pageLength: 10,
     dom: 'lBfrtip<"actions">',
     buttons: [
       {

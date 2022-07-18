@@ -1,7 +1,7 @@
-@extends('layouts.admin')
+@extends('layouts.layout')
 @section('content')
 
-<div class="card">
+<div class="card card-warning card-outline">
     <div class="card-header">
         {{ trans('global.create') }} {{ trans('global.permission.title_singular') }}
     </div>

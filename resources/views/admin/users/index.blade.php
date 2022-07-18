@@ -1,15 +1,15 @@
-@extends('layouts.admin')
+@extends('layouts.layout')
 @section('content')
 @can('user_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.users.create") }}">
+            <a class="btn btn-warning" href="{{ route("admin.users.create") }}">
                 {{ trans('global.add') }} {{ trans('global.user.title_singular') }}
             </a>
         </div>
     </div>
 @endcan
-<div class="card">
+<div class="card card-warning card-outline">
     <div class="card-header">
         {{ trans('global.user.title_singular') }} {{ trans('global.list') }}
     </div>
@@ -26,13 +26,16 @@
                             {{ trans('global.user.fields.name') }}
                         </th>
                         <th>
-                            {{ trans('global.user.fields.email') }}
+                            NIK
                         </th>
                         <th>
-                            {{ trans('global.user.fields.email_verified_at') }}
+                            Profile Photo
                         </th>
                         <th>
-                            {{ trans('global.user.fields.roles') }}
+                            Identity Photo
+                        </th>
+                        <th>
+                            Status
                         </th>
                         <th>
                             &nbsp;
@@ -49,15 +52,20 @@
                                 {{ $user->name ?? '' }}
                             </td>
                             <td>
-                                {{ $user->email ?? '' }}
+                                {{ $user->nik ?? '' }}
                             </td>
                             <td>
-                                {{ $user->email_verified_at ?? '' }}
+                                <a href="{{ $user->url_foto ? asset('images/profiles/'.$user->url_foto) : asset('images/default-user-photo.png')}}" data-toggle="lightbox" data-title="KTP">
+                                    <img src="{{ $user->url_foto ? asset('images/profiles/'.$user->url_foto) : asset('images/default-user-photo.png')}}" class="img-fluid mb-2" width="100"/>
+                                  </a>
                             </td>
                             <td>
-                                @foreach($user->roles as $key => $item)
-                                    <span class="badge badge-info">{{ $item->title }}</span>
-                                @endforeach
+                                <a href="{{ $user->url_ktp ? asset('images/identities/'.$user->url_ktp) : asset('images/identities/no-image-icon-23485.png')}}" data-toggle="lightbox" data-title="KTP">
+                                    <img src="{{ $user->url_ktp ? asset('images/identities/'.$user->url_ktp) : asset('images/identities/no-image-icon-23485.png')}}" class="img-fluid mb-2" width="200"/>
+                                  </a>
+                            </td>
+                            <td>
+                                {{$user->verified == 0 ? 'Unverified' : 'Verified'}}
                             </td>
                             <td>
                                 @can('user_show')
@@ -77,6 +85,12 @@
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                     </form>
                                 @endcan
+                                @if($user->verified == 0)
+                                <form action="{{ route('admin.users.verify', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure to verify this user?');" style="display: inline-block;">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="submit" class="btn btn-xs btn-warning" value="Verify">
+                                </form>
+                                @endif
                             </td>
 
                         </tr>

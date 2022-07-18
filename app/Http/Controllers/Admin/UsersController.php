@@ -8,12 +8,14 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Role;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UsersController extends Controller
 {
     public function index()
     {
-        abort_unless(\Gate::allows('user_access'), 403);
+        abort_unless(Gate::allows('user_access'), 403);
 
         $users = User::all();
 
@@ -22,7 +24,7 @@ class UsersController extends Controller
 
     public function create()
     {
-        abort_unless(\Gate::allows('user_create'), 403);
+        abort_unless(Gate::allows('user_create'), 403);
 
         $roles = Role::all()->pluck('title', 'id');
 
@@ -31,7 +33,7 @@ class UsersController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        abort_unless(\Gate::allows('user_create'), 403);
+        abort_unless(Gate::allows('user_create'), 403);
 
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
@@ -41,7 +43,7 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        abort_unless(\Gate::allows('user_edit'), 403);
+        abort_unless(Gate::allows('user_edit'), 403);
 
         $roles = Role::all()->pluck('title', 'id');
 
@@ -50,9 +52,23 @@ class UsersController extends Controller
         return view('admin.users.edit', compact('roles', 'user'));
     }
 
+    public function verify(Request $request, $id)
+    {
+        abort_unless(Gate::allows('user_edit'), 403);
+
+        $user = User::find($id);
+        $user->update([
+            'verified' => true,
+        ]);
+
+        $users = User::all();
+
+        return view('admin.users.index', compact('users'));
+    }
+
     public function update(UpdateUserRequest $request, User $user)
     {
-        abort_unless(\Gate::allows('user_edit'), 403);
+        abort_unless(Gate::allows('user_edit'), 403);
 
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
@@ -62,7 +78,7 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
-        abort_unless(\Gate::allows('user_show'), 403);
+        abort_unless(Gate::allows('user_show'), 403);
 
         $user->load('roles');
 
@@ -71,7 +87,7 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
-        abort_unless(\Gate::allows('user_delete'), 403);
+        abort_unless(Gate::allows('user_delete'), 403);
 
         $user->delete();
 

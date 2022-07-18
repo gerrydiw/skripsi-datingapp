@@ -33,6 +33,8 @@ Route::group(['as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']
 
     Route::resource('users', 'UsersController');
 
+    Route::post('users/verify/{id}', 'UsersController@verify')->name('users.verify');
+
     Route::delete('products/destroy', 'ProductsController@massDestroy')->name('products.massDestroy');
 
     Route::resource('products', 'ProductsController');
