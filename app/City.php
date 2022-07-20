@@ -23,4 +23,9 @@ class City extends Model
     {
         return $this->hasMany('App\User');
     }
+
+    public function places()
+    {
+        return $this->hasMany('App\Place');
+    }
 }

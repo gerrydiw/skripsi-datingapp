@@ -106,7 +106,7 @@ class ProfileController extends Controller
 
             //upload new file
             $file = $request->file;
-            $filename = $file->getClientOriginalName();
+            $filename = time() . $file->getClientOriginalExtension();
             $file->move($path, $filename);
 
             //for update in table
@@ -131,7 +131,7 @@ class ProfileController extends Controller
 
             //upload new file
             $file = $request->file;
-            $filename = $file->getClientOriginalName();
+            $filename = time() . $file->getClientOriginalExtension();
             $file->move($path, $filename);
 
             //for update in table

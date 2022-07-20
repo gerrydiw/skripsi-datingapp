@@ -82,9 +82,10 @@
         <div class="card card-warning card-outline">
           <div class="card-body box-profile">
             <div class="text-center">
-              <img class="profile-user-img img-fluid img-circle"
-                   src="{{ $user->url_foto ? asset('images/profiles/'.$user->url_foto) : asset('images/default-user-photo.png')}}"
-                   alt="User profile picture">
+              
+                   <a href="{{ $user->url_foto ? asset('images/profiles/'.$user->url_foto) : asset('images/default-user-photo.png')}}" data-toggle="lightbox" data-title="Profile Photo">
+                    <img src="{{ $user->url_foto ? asset('images/profiles/'.$user->url_foto) : asset('images/default-user-photo.png')}}" class="profile-user-img img-fluid img-circle"/>
+                  </a>
             </div>
 
             <h3 class="profile-username text-center">{{$user->name}}</h3>

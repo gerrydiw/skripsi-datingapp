@@ -55,7 +55,7 @@
                                 {{ $user->nik ?? '' }}
                             </td>
                             <td>
-                                <a href="{{ $user->url_foto ? asset('images/profiles/'.$user->url_foto) : asset('images/default-user-photo.png')}}" data-toggle="lightbox" data-title="KTP">
+                                <a href="{{ $user->url_foto ? asset('images/profiles/'.$user->url_foto) : asset('images/default-user-photo.png')}}" data-toggle="lightbox" data-title="Profile Photo">
                                     <img src="{{ $user->url_foto ? asset('images/profiles/'.$user->url_foto) : asset('images/default-user-photo.png')}}" class="img-fluid mb-2" width="100"/>
                                   </a>
                             </td>
@@ -137,7 +137,17 @@
 @endcan
 
   $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+
 })
+
+$(document).ready(function () {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox({
+          alwaysShowClose: true
+      });
+    });
+    });
 
 </script>
 @endsection

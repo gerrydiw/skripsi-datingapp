@@ -16,6 +16,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('profile/updatektp/{id}', 'ProfileController@updateKtp')->name('profile.updateKtp');
     Route::get('find', 'FindController@index')->name('find.index');
     Route::post('find/people', 'FindController@findPeople')->name('find.people');
+    Route::resource('places', 'PlaceController');
 });
 
 Route::group(['as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {

@@ -42,7 +42,7 @@
                   <a href="{{route("find.index")}}" class="nav-link">Find</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                  <a href="#" class="nav-link">Place</a>
+                  <a href="{{route("places.index")}}" class="nav-link">Place</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Profil</a>
@@ -136,9 +136,12 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script>
         $(function() {
+          bsCustomFileInput.init();
+
   let copyButtonTrans = '{{ trans('global.datatables.copy') }}'
   let csvButtonTrans = '{{ trans('global.datatables.csv') }}'
   let excelButtonTrans = '{{ trans('global.datatables.excel') }}'
