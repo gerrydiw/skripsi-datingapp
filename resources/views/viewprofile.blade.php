@@ -178,11 +178,11 @@
                     <p>{{$user->aboutme ?? '-'}}</p>
                 </div>
               </div>
-              {{-- <div class="form-group row">
+              <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
-                  <button type="submit" class="btn btn-warning">Submit</button>
+                  <a href="{{route("find.index")}}" class="btn btn-warning">Back</a>
                 </div>
-              </div> --}}
+              </div>
             </form>
             {{-- <div class="tab-content">
               <div class="active tab-pane" id="activity">

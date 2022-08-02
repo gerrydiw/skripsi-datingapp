@@ -60,7 +60,7 @@
                         </div>
                         <div class="card-footer">
                           <div class="text-right">
-                            <a href="{{route("profile.view", [$place->id])}}" class="btn btn-sm btn-primary">
+                            <a href="{{route("places.show", [$place->id])}}" class="btn btn-sm btn-primary">
                                View Place
                             </a>
                           </div>

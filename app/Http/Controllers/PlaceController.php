@@ -62,7 +62,8 @@ class PlaceController extends Controller
      */
     public function show($id)
     {
-        //
+        $place = Place::find($id);
+        return view('viewplace', compact('place'));
     }
 
     /**
