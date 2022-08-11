@@ -14,7 +14,7 @@
       @method('PUT')
       <div class="modal-body">
           <div class="custom-file">
-              <input type="file" class="custom-file-input" name="file">
+              <input type="file" class="custom-file-input" name="avatar">
               <label class="custom-file-label">Pilih file</label>
             </div>
             <small class="form-text text-muted">
@@ -83,8 +83,8 @@
           <div class="card-body box-profile">
             <div class="text-center">
               
-                   <a href="{{ $user->url_foto ? asset('images/profiles/'.$user->url_foto) : asset('images/default-user-photo.png')}}" data-toggle="lightbox" data-title="Profile Photo">
-                    <img src="{{ $user->url_foto ? asset('images/profiles/'.$user->url_foto) : asset('images/default-user-photo.png')}}" class="profile-user-img img-fluid img-circle"/>
+                   <a href="{{ $user->avatar ? asset('storage/users-avatar/'.$user->avatar) : asset('storage/users-avatar/avatar.png')}}" data-toggle="lightbox" data-title="Profile Photo">
+                    <img src="{{ $user->avatar ? asset('storage/users-avatar/'.$user->avatar) : asset('storage/users-avatar/avatar.png')}}" class="profile-user-img img-fluid img-circle"/>
                   </a>
             </div>
 

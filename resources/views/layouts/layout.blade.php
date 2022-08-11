@@ -44,6 +44,9 @@
                 <li class="nav-item d-none d-sm-inline-block">
                   <a href="{{route("places.index")}}" class="nav-link">Place</a>
                 </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                  <a href="/chat/{{auth()->user()->id}}" target="_blank" class="nav-link">Chat</a>
+                </li>
                 <li class="nav-item dropdown">
                   <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Profil</a>
                   <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">

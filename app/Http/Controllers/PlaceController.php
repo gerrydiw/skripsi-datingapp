@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\City;
 use App\Place;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PlaceController extends Controller
 {
@@ -15,6 +16,7 @@ class PlaceController extends Controller
      */
     public function index()
     {
+        abort_unless(Gate::allows('place_access'), 403);
         $places = Place::paginate(10);
         return view('place', compact('places'));
     }

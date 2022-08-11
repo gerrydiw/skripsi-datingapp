@@ -15,6 +15,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('profile/updatephoto/{id}', 'ProfileController@updatePhoto')->name('profile.updatePhoto');
     Route::put('profile/updatektp/{id}', 'ProfileController@updateKtp')->name('profile.updateKtp');
     Route::get('find', 'FindController@index')->name('find.index');
+    // Route::get('chat/{id}', 'ChatController@show')->name('chat.show');
     Route::post('find/people', 'FindController@findPeople')->name('find.people');
     Route::resource('places', 'PlaceController');
 });

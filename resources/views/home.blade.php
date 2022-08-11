@@ -15,8 +15,8 @@
                         <div class="card-body pt-0">
                           <div class="row">
                             <div class="col-12 text-center">
-                              <a href="{{ $user->url_foto ? asset('images/profiles/'.$user->url_foto) : asset('images/default-user-photo.png')}}" data-toggle="lightbox" data-title="Profile Photo">
-                                <img src="{{ $user->url_foto ? asset('images/profiles/'.$user->url_foto) : asset('images/default-user-photo.png')}}" class="profile-user-img img-fluid img-circle"/>
+                              <a href="{{ $user->avatar ? asset('storage/users-avatar/'.$user->avatar) : asset('storage/users-avatar/avatar.png')}}" data-toggle="lightbox" data-title="Profile Photo">
+                                <img src="{{ $user->avatar ? asset('storage/users-avatar/'.$user->avatar) : asset('storage/users-avatar/avatar.png')}}" class="profile-user-img img-fluid img-circle"/>
                               </a>
                             </div>
                           </div>
@@ -39,9 +39,9 @@
                         </div>
                         <div class="card-footer">
                           <div class="text-right">
-                            <a href="#" class="btn btn-sm bg-teal">
+                            {{-- <a href="{{route('chat.show', [$user->id])}}" class="btn btn-sm bg-teal">
                               <i class="fas fa-comments"></i>
-                            </a>
+                            </a> --}}
                             <a href="{{route("profile.view", [$user->id])}}" class="btn btn-sm btn-primary">
                               <i class="fas fa-user"></i> View Profile
                             </a>
@@ -66,6 +66,16 @@
 </div>
 @endsection
 @section('scripts')
+<script>
+  $(document).ready(function () {
+  $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox({
+          alwaysShowClose: true
+      });
+    });
+  });
+</script>
 @parent
 
 @endsection

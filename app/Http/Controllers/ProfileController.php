@@ -6,6 +6,7 @@ use App\City;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ProfileController extends Controller
 {
@@ -50,6 +51,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
+        abort_unless(Gate::allows('profile_access'), 403);
         $user = User::find($id);
         $cities = City::all();
         return view('viewprofile', compact('user', 'cities'));
@@ -95,22 +97,26 @@ class ProfileController extends Controller
 
         $user = User::find($id);
 
-        if ($request->file != '') {
-            $path = public_path() . '/images/profiles/';
+        if ($request->avatar != '') {
+            $path = public_path() . '/storage/users-avatar/';
 
             //code for remove old file
-            if ($user->url_foto != ''  && $user->url_foto != null) {
-                $file_old = $path . $user->url_foto;
+            if ($user->avatar != ''  && $user->avatar != null) {
+                $file_old = $path . $user->avatar;
                 unlink($file_old);
             }
 
             //upload new file
-            $file = $request->file;
-            $filename = time() . $file->getClientOriginalExtension();
+            $file = $request->avatar;
+            $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move($path, $filename);
 
             //for update in table
-            $user->update(['url_foto' => $filename]);
+            $user->update(['avatar' => $filename]);
+            // $path = $request->file('avatar')->storeAs(
+            //     'users-avatar',
+            //     $id
+            // );
             return redirect()->route('profile');
         }
     }

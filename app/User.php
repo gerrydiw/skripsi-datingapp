@@ -38,6 +38,8 @@ class User extends Authenticatable
         'hobbies',
         'city_id',
         'aboutme',
+        'avatar',
+        'active_status',
         'created_at',
         'updated_at',
         'deleted_at',

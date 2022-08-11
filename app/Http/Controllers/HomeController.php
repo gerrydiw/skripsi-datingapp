@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        abort_unless(Gate::allows('home_access'), 403);
         $users = User::whereNotIn('id', [1, Auth::user()->id])->paginate(9);
         return view('home', compact('users'));
     }
